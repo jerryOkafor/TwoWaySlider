@@ -9,7 +9,7 @@ import android.graphics.drawable.ShapeDrawable;
 public class ColorUtils {
     private static int FIRST_COLOR = Color.RED;
     private static int SECOND_COLOR = Color.BLUE;
-    private static int THIRD_COLOR = Color.GREEN;
+    private static int THIRD_COLOR = Color.parseColor("#2BB74B");
 
     public static int getColor(float p) {
         int c0;

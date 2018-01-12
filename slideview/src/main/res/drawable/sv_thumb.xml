@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:innerRadius="28dp"
-    android:shape="ring"
-    android:thickness="7dp"
-    android:useLevel="false">
-    <size
-        android:width="70dp"
-        android:height="70dp" />
-    <gradient
-        android:centerColor="#BC3636"
-        android:endColor="#37BF66"
-        android:startColor="#37BF66" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/thumbPointerLeft"
+        android:bottom="20dp"
+        android:drawable="@drawable/ic_chevron_left"
+        android:right="90dp"
+        android:top="20dp">
+        <size
+            android:width="80dp"
+            android:height="70dp" />
+    </item>
+    <item android:id="@+id/thumbBg">
+        <shape
+            android:innerRadius="25dp"
+            android:shape="ring"
+            android:thickness="6dp"
+            android:useLevel="false">
+            <size
+                android:width="70dp"
+                android:height="70dp" />
+            <gradient
+                android:centerColor="#BC3636"
+                android:endColor="#37BF66"
+                android:startColor="#37BF66" />
+        </shape>
+    </item>
+    <item
+        android:id="@+id/thumbPointerRight"
+        android:bottom="20dp"
+        android:drawable="@drawable/ic_chevron_right"
+        android:left="90dp"
+        android:top="20dp">
+        <size
+            android:width="80dp"
+            android:height="70dp" />
+    </item>
+
+</layer-list>

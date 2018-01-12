@@ -3,7 +3,6 @@ package me.jerryhanks.sliderview;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,9 +15,12 @@ import android.widget.TextView;
  */
 
 public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBarChangeListener {
+
+    private static final String TAG = "TwoWaySlideView";
+
     private Slider slider;
     private TextView failTv, successTv;
-    private static final String TAG = "TwoWaySlideView";
+    private OnSlideCallback slideListener;
 
     public TwoWaySlideView(Context context) {
         super(context);
@@ -55,17 +57,28 @@ public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBar
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         Log.d(TAG, "Progress : " + progress);
-
         setViewBackground(ColorUtils.getColor(progress / 100f));
         updateTextColors(progress);
+        if (slideListener != null)
+            if (progress == 5) {
+
+                //slide negative
+                slideListener.onSlideFinished(false);
+            } else if (progress == 95) {
+
+                //slide positive
+                slideListener.onSlideFinished(true);
+            }
 
     }
 
     private void updateTextColors(int progress) {
         if (progress > 50) {
             successTv.setAlpha(1 - (progress - 50) / 100f);
+            failTv.setAlpha(0f);
         } else if (progress < 50) {
             failTv.setAlpha(1 - (progress + 50) / 100f);
+            successTv.setAlpha(0f);
         } else if (progress == 50) {
             failTv.setTextColor(Color.WHITE);
             successTv.setTextColor(Color.WHITE);
@@ -91,4 +104,12 @@ public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBar
 
     }
 
+    public void setSlideListener(OnSlideCallback slideListener) {
+        this.slideListener = slideListener;
+    }
+
+
+    public interface OnSlideCallback {
+        void onSlideFinished(boolean which);
+    }
 }

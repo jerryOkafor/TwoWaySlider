@@ -7,9 +7,6 @@ import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.SeekBar;
-
-import java.util.Timer;
 
 /**
  * @author Jerry Hanks on 1/12/18.

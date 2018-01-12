@@ -32,6 +32,7 @@
         android:minHeight="38dp"
         android:progress="50"
         android:thumbOffset="10dp"
+        android:elevation="16dp"
         android:progressDrawable="@android:color/transparent"
         android:splitTrack="false"
         android:thumb="@drawable/sv_thumb"
