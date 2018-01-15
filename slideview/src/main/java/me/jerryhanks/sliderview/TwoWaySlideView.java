@@ -3,9 +3,11 @@ package me.jerryhanks.sliderview;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBar
     private Slider slider;
     private TextView failTv, successTv;
     private OnSlideCallback slideListener;
+    private LayerDrawable thumb;
+    private TextView tvPosition;
 
     public TwoWaySlideView(Context context) {
         super(context);
@@ -46,8 +50,12 @@ public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBar
         slider = findViewById(R.id.sv_slider);
         slider.setOnSeekBarChangeListener(this);
 
+        thumb = (LayerDrawable) slider.getThumb();
+//        thumb.mutate();
+
         failTv = findViewById(R.id.tvFail);
         successTv = findViewById(R.id.tvSuccess);
+        tvPosition = findViewById(R.id.tvPosition);
 
         //set the initial text color
         updateTextColors(50);
@@ -74,14 +82,32 @@ public class TwoWaySlideView extends RelativeLayout implements SeekBar.OnSeekBar
 
     private void updateTextColors(int progress) {
         if (progress > 50) {
-            successTv.setAlpha(1 - (progress - 50) / 100f);
+            float alphaToRight = (1-progress) / 100f;
+            successTv.setAlpha(alphaToRight);
             failTv.setAlpha(0f);
+
+            tvPosition.setText(successTv.getText());
+            tvPosition.setVisibility(VISIBLE);
+
+            thumb.findDrawableByLayerId(R.id.thumbPointerLeft).setAlpha((int) alphaToRight);
+            thumb.findDrawableByLayerId(R.id.thumbPointerRight).setAlpha(255);
         } else if (progress < 50) {
-            failTv.setAlpha(1 - (progress + 50) / 100f);
+            float alphaToLeft = (1-progress) / 100f;
+            failTv.setAlpha(alphaToLeft);
             successTv.setAlpha(0f);
+
+            tvPosition.setText(failTv.getText());
+            tvPosition.setVisibility(VISIBLE);
+
+            thumb.findDrawableByLayerId(R.id.thumbPointerLeft).setAlpha(255);
+            thumb.findDrawableByLayerId(R.id.thumbPointerRight).setAlpha((int) alphaToLeft);
         } else if (progress == 50) {
-            failTv.setTextColor(Color.WHITE);
-            successTv.setTextColor(Color.WHITE);
+            thumb.findDrawableByLayerId(R.id.thumbPointerLeft).setAlpha(255);
+            thumb.findDrawableByLayerId(R.id.thumbPointerRight).setAlpha(255);
+
+            tvPosition.setVisibility(INVISIBLE);
+
+
             successTv.setAlpha(1f);
             failTv.setAlpha(1f);
         }

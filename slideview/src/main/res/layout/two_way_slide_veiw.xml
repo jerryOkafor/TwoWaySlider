@@ -17,9 +17,11 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginStart="10dp"
-        android:text="Fail"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold" />
+        android:text="@string/fail"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:textColor="@color/black" />
 
     <me.jerryhanks.sliderview.Slider
         android:id="@+id/sv_slider"
@@ -27,16 +29,34 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:clickable="false"
+        android:elevation="16dp"
         android:max="100"
         android:maxHeight="38dp"
         android:minHeight="38dp"
         android:progress="50"
-        android:thumbOffset="10dp"
-        android:elevation="16dp"
         android:progressDrawable="@android:color/transparent"
         android:splitTrack="false"
         android:thumb="@drawable/sv_thumb"
+        android:thumbOffset="10dp"
         tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/tvPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="@string/success"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tvSuccess"
@@ -49,9 +69,11 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginStart="10dp"
-        android:text="Success"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold" />
+        android:text="@string/success"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:textColor="@color/black" />
 
 
 </merge>
